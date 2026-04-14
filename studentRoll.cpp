@@ -66,8 +66,10 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
   // fill in...
   Node* curr = head;
   while ( curr ) {
-	  Node* temp = curr;
-	  curr = curr->next;
+	  Node* temp = curr->next;
+	  delete curr->s;
+	  delete curr;
+	  curr = temp;
   }
   head = tail = nullptr;
   Node* tempOther = right.head;

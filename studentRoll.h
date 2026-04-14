@@ -20,7 +20,6 @@ class StudentRoll {
     Student *s;
     Node *next;
   };
-  Node() : s(nullptr), next(nullptr) {}
   Node *head;
   Node *tail;
 };
