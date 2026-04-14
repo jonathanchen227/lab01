@@ -8,13 +8,14 @@ StudentRoll::StudentRoll() {
 void StudentRoll::insertAtTail(const Student &student) {
   Node* newNode = new Node;
   newNode->s  = new Student(student);
+  newNode->next = nullptr;
   if ( !head ) {
 	  head= tail = newNode;
   }
   else {
 	tail->next = newNode;
 	tail = newNode;
-  }	  
+  } 
 }
 
 std::string StudentRoll::toString() const {
@@ -46,10 +47,9 @@ StudentRoll::~StudentRoll() {
   while ( current ) {
 	  Node* temp = current;
 	  current = current->next;
-	  delete temp->s;
-	  delete temp;
 	  
   }
+  head = tail = nullptr;
 }
 
 StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
@@ -66,13 +66,8 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
   while ( curr ) {
 	  Node* temp = curr;
 	  curr = curr->next;
-	  delete temp->s;
-	  delete temp;
   }
   head = tail = nullptr;
-  if ( !(&right) ) {
-	  return *this;
-  }
   Node* tempOther = right.head;
 
   while (tempOther ) {
@@ -80,10 +75,10 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
 	  tempOther = tempOther->next;
   }
   
-
   // KEEP THE CODE BELOW THIS LINE
   // Overloaded = should end with this line, despite what the textbook says.
-  return (*this); 
+  return (*this);
+  
   
 }
 

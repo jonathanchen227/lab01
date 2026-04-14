@@ -2,32 +2,38 @@
 #include <string>
 #include <cstring>
 
-Student::Student(const char * const name, int perm) {
-  this->setName(name);
-  this->setPerm(perm);
+Student::Student(const char * const n, int p) {
+  perm = p;
+  if ( n ) {
+	  name = new char[strlen(n) + 1];
+	  strcpy(name,n);
+  }
+  else {
+	  name = nullptr;
+  }
 }
 
 int Student::getPerm() const {
-  return this->perm;
+  return perm;
 }
 
 const char * const Student::getName() const {
-  return this->name;
+  return name;
 }
 
 void Student::setPerm(const int permNumber) {
   perm = permNumber;
 }
 
-void Student::setName(const char * const name) {
-  this->name = new char[strlen(name)+1];
-  strcpy(this->name,name);
+void Student::setName(const char * const n) {
+  name = new char[strlen(n)+1];
+  strcpy(name,n);
 }
 
 
 Student::Student(const Student &orig) {
-  this->setName(orig.getName());
-  this->setPerm(orig.getPerm());
+  setName(orig.getName());
+  setPerm(orig.getPerm());
 }
 
 Student::~Student() {
@@ -44,8 +50,11 @@ Student & Student::operator=(const Student &right) {
 
   // TODO... Here is where there is code missing that you need to 
   // fill in...
-  *name = *(right.getName());
+  delete[] name;
   perm = right.getPerm();
+  name = new char[strlen(right.getName())+1];
+  strcpy(name,right.getName());
+  return *this;
 
 
   // KEEP THE CODE BELOW THIS LINE
