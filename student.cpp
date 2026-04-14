@@ -26,8 +26,14 @@ void Student::setPerm(const int permNumber) {
 }
 
 void Student::setName(const char * const n) {
+  delete[]name;
+  if(n) {
   name = new char[strlen(n)+1];
   strcpy(name,n);
+  }
+  else {
+	  name = nullptr;
+ }
 }
 
 
@@ -47,14 +53,17 @@ Student & Student::operator=(const Student &right) {
 
   if (&right == this) 
     return (*this);
-
+  delete[] name;
   // TODO... Here is where there is code missing that you need to 
   // fill in...
-  delete[] name;
-  perm = right.getPerm();
-  name = new char[strlen(right.getName())+1];
-  strcpy(name,right.getName());
-  return *this;
+  if(right.name) {
+	  perm = right.perm;
+  name = new char[strlen(right.name)+1];
+  strcpy(name,right.name);
+  } else {
+	  name = nullptr;
+ }
+
 
 
   // KEEP THE CODE BELOW THIS LINE
@@ -64,6 +73,6 @@ Student & Student::operator=(const Student &right) {
 }
 
 std::string Student::toString() const {
-  return *(this->getName()) + " " + this->getPerm();
+  return "[" + std::string(name) +  "," + std::to_string(perm) +"]";
 }
 

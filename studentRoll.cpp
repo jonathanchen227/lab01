@@ -23,7 +23,7 @@ std::string StudentRoll::toString() const {
   Node* curr = head;
   while ( curr ) {
 	  result += curr->s->toString();
-	  result += "\n";
+	  if(curr->next) result += ",";
 	  curr = curr->next;
   }
   result += "]";
@@ -47,6 +47,8 @@ StudentRoll::~StudentRoll() {
   while ( current ) {
 	  Node* temp = current;
 	  current = current->next;
+	  delete temp->s;
+	  delete temp;
 	  
   }
   head = tail = nullptr;
