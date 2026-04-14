@@ -4,6 +4,7 @@
 
 Student::Student(const char * const n, int p) {
   perm = p;
+  name = nullptr;
   if ( n ) {
 	  name = new char[strlen(n) + 1];
 	  strcpy(name,n);
@@ -73,7 +74,6 @@ Student & Student::operator=(const Student &right) {
 }
 
 std::string Student::toString() const {
-	std::string n = (name ? name : "" );
-	return "[" + std::string(name) +  "," + std::to_string(perm) +"]";
+	return "[" + std::string(name?name:"") +  "," + std::to_string(perm) +"]";
 }
 
