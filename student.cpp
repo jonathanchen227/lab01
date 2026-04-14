@@ -39,6 +39,7 @@ void Student::setName(const char * const n) {
 
 
 Student::Student(const Student &orig) {
+  name = nullptr;
   setName(orig.getName());
   setPerm(orig.getPerm());
 }
